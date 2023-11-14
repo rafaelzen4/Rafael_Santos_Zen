@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar usuário</title>
+    <link rel="stylesheet" href="style-novocadastro.css">
+    <script src="navbar.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./imgs/logo-automarket.png" alt="Logo AutoMarket">
+            <h1>AutoMarket</h1>
+        </div>
+
+        <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+
+        <nav class="nav-header">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Catálogo</a></li>
+                <li><a href="#">Vendedores</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="cadastro.html" id="header-btn-cadastro">Cadastrar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="pagina-cadastro">
+                <div class="form">
+                  <form class="formulario-login" id="form">
+                    <input type="text" placeholder="Nome de usuário"/>
+                    <input type="email" placeholder="E-mail"/>
+                    <input type="password" placeholder="Crie uma senha"/>
+                    <input type="text" name="cep" id="cep" maxlength="9" onblur="buscaCep(this.value)" placeholder="Digite o CEP"><br>
+                    <input type="text" name="rua" id="rua" placeholder="Logradouro"><br>
+                    <input type="text" name="bairro" id="bairro" placeholder="Bairro"><br>
+                    <input type="text" name="cidade" id="cidade" placeholder="Cidade"><br>
+                    <input type="button" value="Localizar endereço" class="botaocadastro"> 
+                    <button>Cadastrar</button>
+                    <p class="mensagem">Já tem uma conta? &nbsp;<a href="#">Fazer Login</a></p>
+                  </form>
+                </div>
+              </div>
+        </section>
+    </main>
+    <footer>
+        <p><b>&copy; 1995 - 2023 AutoMarket S.A. Todos os direitos reservados.</b></p>
+    </footer>
+</body>
+
+<script>
+// Parte de script adicionada neste trabalho [Rafael Santos Zen]
+
+//Primeiro, fiz o uso de uma API para busca do CEP, assim como aprendemos em aula
+
+//aqui criei as constantes em referência aos elementos do form
+const form = document.getElementById("form");
+    const cep = document.getElementById("cep");
+    const rua = document.getElementById("rua");
+    const bairro = document.getElementById("bairro");
+    const cidade = document.getElementById("cidade");
+
+
+    //havendo a possibilidade do cep estar errado, fiz esta parte assim como aprendi em sala de aula
+    function cepErrado(msg){
+        const erro = document.createElement("label");
+        erro.innerText = "CEP: " + cep.value + " " + msg;
+        erro.style.color = "red";
+        erro.style.fontWeight = "bold";
+        erro.id = "erro";
+        cep.parentNode.insertBefore(erro, cep.nextSibling);
+        form.reset();
+    }
+
+    //nesta parte criei o retorno dos campos, caso não houver erro ele irá funcionar, no caso do cep estar errado será sinalizado como não localizado
+    function retorno(conteudo){
+        if(!("erro" in conteudo)){
+            cep.value = conteudo.cep;
+            rua.value = conteudo.logradouro;
+            bairro.value = conteudo.bairro;
+            cidade.value = conteudo.localidade;
+        }
+        
+        else{
+            cepErrado("Não foi localizado");
+        }
+    }
+
+    //Aqui é onde acontece a busca da API, adicionei uma mensagem pedindo para o usuário aguardar enquanto as informações são puxadas
+    function buscaCep(valor){
+
+        msgErro = document.getElementById("erro");
+        if(msgErro){
+            form.removeChild(msgErro);
+        }
+        
+        var cepValido = valor.replace(/\D/g, "");
+
+        if(cepValido != ""){
+
+            var padraoCep = /^[0-9]{8}$/;
+            if(padraoCep.test(cepValido)){
+                rua.value = "Aguarde...";
+                bairro.value = "Aguarde...";
+                cidade.value = "Aguarde...";
+
+                const script = document.createElement("script");
+
+                script.src = "https://viacep.com.br/ws/"+ cepValido +"/json/?callback=retorno";
+                
+                document.body.appendChild(script);
+            }
+            
+            else{
+                cepErrado("CEP inválido");
+            }
+        }
+        
+        else{
+            cepErrado("Digite o CEP corretamente");
+        }
+    }
+
+
+</script>
+</html>
