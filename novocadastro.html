@@ -44,11 +44,18 @@
                     <input type="text" name="bairro" id="bairro" placeholder="Bairro"><br>
                     <input type="text" name="cidade" id="cidade" placeholder="Cidade"><br>
                     <input type="button" value="Localizar endereço" class="botaocadastro"> 
-                    <button>Cadastrar</button>
+                    <button id="cadastro">Cadastrar</button>
                     <p class="mensagem">Já tem uma conta? &nbsp;<a href="#">Fazer Login</a></p>
                   </form>
                 </div>
               </div>
+              
+              <div class="botoes">
+                <button id="maserati"><i>1</i></button>
+                <button id="lambo"><i>2</i></button>
+                <button id="nissan"><i>3</i></button>
+              </div>
+
         </section>
     </main>
     <footer>
@@ -129,6 +136,28 @@ const form = document.getElementById("form");
         }
     }
 
+    //botão atualizado com mensagem de alerta
+
+    var btn = document.getElementById('cadastro')
+
+btn.addEventListener('click', function(){
+   alert('Usuário cadastrado!');
+});
+
+    // Também acabei fazendo uma funcionalidade de troca de background
+
+    var fundo = document.querySelector("body");
+
+document.getElementById('maserati').addEventListener('click', function(){
+  fundo.style.backgroundImage = "url('imgs/maserati.jpg')";
+});
+document.getElementById('lambo').addEventListener('click', function(){
+  fundo.style.backgroundImage = "url('imgs/lambo.jpg')";
+})
+document.getElementById('nissan').addEventListener('click', function(){
+  fundo.style.backgroundImage = "url('imgs/nissan.jpg')";
+});
 
 </script>
 </html>
+

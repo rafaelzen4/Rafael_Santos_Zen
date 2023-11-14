@@ -210,6 +210,30 @@ footer p{
   box-sizing: border-box;
   font-size: 14px;
 }
+
+
+.form .mensagem {
+  margin: 15px 0 0;
+  color: #cbcbcb;
+  font-size: 12px;
+}
+.form .mensagem a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+  background: transparent; 
+  background-image: url("imgs/wp2185461-car-interior-wallpapers\ \(1\).jpg");
+  background-size: cover; 
+  background-position: center;   
+}
+
+
+
+/* botão atualizado */
+
 .form button {
     font-family: 'Poppins', sans-serif;
   outline: 0;
@@ -223,29 +247,49 @@ footer p{
   font-size: 14px;
   cursor: pointer;
 }
+
 .form button:hover,.form button:active,.form button:focus {
-  background: #ffffff;
-  color: #ff4545;
-}
-.form .mensagem {
-  margin: 15px 0 0;
-  color: #cbcbcb;
-  font-size: 12px;
-}
-.form .mensagem a {
-  color: #ffffff;
-  text-decoration: none;
-}
+    background: #ffffff;
+    color: #ff4545;
+  }
+
+/* adição do botão localizar CEP com animação */
 
 .botaocadastro:hover, .botaocadastro:active, .botaocadastro:focus{
     background: #ffffff;
     color: #ff4545;
+    cursor: pointer;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-  background: transparent; 
-  background-image: url("imgs/wp2185461-car-interior-wallpapers\ \(1\).jpg");
-  background-size: cover;     
-}
-
+/* parte da troca de background */
+  
+  .botoes {
+    width: 50px;
+    overflow: hidden;
+  }
+  
+  .botoes button {
+    display: block;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    border: 1px solid white;
+    width: 100%;
+    padding: 0.5em 0;
+    font-size: 1.5rem;
+    &:first-child {
+      border-radius: 6px 6px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 6px 6px;
+    }
+    &:hover {
+      background: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+    }
+    &:active,
+    &:focus {
+      background: #ff4545;
+      color: white;
+    }
+  }
